@@ -1,0 +1,5 @@
+{
+	"buildOptions": {
+		"lib": ["ES2023"]
+	}
+}
