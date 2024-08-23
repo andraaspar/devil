@@ -97,9 +97,7 @@ j=JSON.stringify
 			let t=row[i],x=w/2+(u+i+0.5)*twidth,y=h/2+(v+j+0.5)*theight/2
 			if(t.tile==='.')drawtile(x,y,0,0)
 			let tl=map[t.y]?.[t.x-1]
-			if(tl){
-				if(tl==='#')drawwalltl(x,y,0,16)
-			}
+			if(tl==='#')drawwalltl(x,y,0,16)
 		}
 	}
 }
