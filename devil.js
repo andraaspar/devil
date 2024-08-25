@@ -1,5 +1,5 @@
 // title: Devil
-// author: András Parditka (andraaspar)
+// author: Andras Parditka (andraaspar)
 // desc: Hack and slash
 // license: MIT
 // version: 1
@@ -86,8 +86,7 @@ j=JSON.stringify
 	// }
 	return r
 }
-,drawmap=()=>{
-	let smap=slicemap(player.x,player.y,4),nrow=smap.length
+,drawmaplayer=(smap,nrow,layer)=>{
 	for(let j=0;j<nrow;j++) {
 		let row=smap[j]
 		,ncol=row.length
@@ -95,48 +94,87 @@ j=JSON.stringify
 		,v=-nrow/2
 		for(let i=0;i<ncol;i++){
 			let t=row[i],x=w/2+(u+i+0.5)*twidth,y=h/2+(v+j+0.5)*theight/2
-			if(t.tile==='.')drawtile(x,y,0,0)
-			let tl=map[t.y]?.[t.x-1]
-			if(tl==='#')drawwalltl(x,y,0,16)
+			if(t.tile==='.'){
+				if(layer===0){
+					let tl=map[t.y]?.[t.x-1]
+					,tr=map[t.y-1]?.[t.x]
+					if(tl==='#')drawwalltl(x,y,0,16)
+					if(tr==='#')drawwalltr(x,y,0,48)
+				}else if(layer===1){
+					let b=map[t.y+1]?.[t.x+1]==='.'
+					,bl=b&&map[t.y+1]?.[t.x]==='#'
+					,br=b&&map[t.y]?.[t.x+1]==='#'
+					drawtilel(x,y,0,bl?32:0,-1)
+					drawtiler(x,y,0,br?64:0,-1)
+				}
+			}
 		}
 	}
 }
+,drawmap=()=>{
+	let smap=slicemap(player.x,player.y,4),nrow=smap.length
+	drawmaplayer(smap,nrow,0)
+	drawmaplayer(smap,nrow,1)
+}
 ,twidth=8*8
 ,theight=4*8
-,wheight=twidth
-,drawtile=(x,y,u,v)=>{
+,wheight=twidth/2
+,drawtilel=(x,y,u,v,t)=>{
 	ttri(
 		x-twidth/2,y,
 		x,y-theight/2,
 		x,y+theight/2,
 		u,v,
 		u+16,v,
-		u,v+16
+		u,v+16,
+		0,
+		t
 	)
+}
+,drawtiler=(x,y,u,v,t)=>{
 	ttri(
 		x+twidth/2,y,
 		x,y-theight/2,
 		x,y+theight/2,
 		u+16,v+16,
 		u+16,v,
-		u,v+16
+		u,v+16,
+		0,
+		t
 	)
 }
 ,drawwalltl=(x,y,u,v)=>{
-	pix(x,y,12)
 	ttri(
 		x-twidth/2,y-wheight,
-		x-twidth/2,y,
 		x,y-theight/2-wheight,
+		x-twidth/2,y,
 		u,v,
 		u+16,v,
 		u,v+16
 	)
 	ttri(
-		x-twidth/2,y-theight/2-wheight,
+		x,y-theight/2,
 		x,y-theight/2-wheight,
+		x-twidth/2,y,
+		u+16,v+16,
+		u+16,v,
+		u,v+16
+	)
+}
+,drawwalltr=(x,y,u,v)=>{
+	ttri(
+		x,y-theight/2-wheight,
+		x+twidth/2,y-wheight,
 		x,y-theight/2,
 		u,v,
+		u+16,v,
+		u,v+16
+	)
+	ttri(
+		x+twidth/2,y,
+		x+twidth/2,y-wheight,
+		x,y-theight/2,
+		u+16,v+16,
 		u+16,v,
 		u,v+16
 	)
