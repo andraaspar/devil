@@ -1,0 +1,20 @@
+{
+	"type": "module",
+	"dependencies": {
+		"npm-run-all": "^4.1.5",
+		"rimraf": "^6.0.1",
+		"rollup": "^4.21.0",
+		"terser": "^5.31.6",
+		"typescript": "^5.5.4"
+	},
+	"scripts": {
+		"clean-ts": "rimraf build-ts",
+		"clean-rollup": "rimraf build-rollup",
+		"clean-terser": "rimraf build-terser && mkdir build-terser",
+		"clean": "run-p clean-ts clean-rollup clean-terser",
+		"compile-ts": "tsc",
+		"compile-rollup": "rollup --config rollup.config.js",
+		"compile-terser": "terser build-rollup/devil.js -o build-terser/devil.min.js --comments all --format semicolons=false --format max_line_len=58",
+		"compile": "run-s clean compile-ts compile-rollup compile-terser"
+	}
+}

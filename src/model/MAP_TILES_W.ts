@@ -1,0 +1,3 @@
+import { MAP_SCREEN_TILES_W } from './MAP_SCREEN_TILES_W'
+
+export const MAP_TILES_W = MAP_SCREEN_TILES_W * 8
