@@ -1,10 +1,10 @@
-import { IRect } from './IRect'
-import { ITile } from './ITile'
+import { IRect } from "./IRect"
+import { ITile } from "./ITile"
 
 export interface IRoom {
 	rect: IRect
-	tiles: ITile[][]
-	doors: [number, number][]
+	tiles: (ITile | undefined)[][]
+	// doors: [number, number][]
 	// doorsAbove: string
 	// doorsBelow: string
 	// doorsLeft: string

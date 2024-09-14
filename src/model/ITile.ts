@@ -1,7 +1,6 @@
 export interface ITile {
 	u: number
 	v: number
-	isVoid: boolean
 	isStart: boolean
 	wallAbove: boolean
 	wallBelow: boolean

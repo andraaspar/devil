@@ -1,11 +1,14 @@
-import { buildMap } from './fun/buildMap'
-import { findRooms } from './fun/findRooms'
-import { set1bpp } from './fun/set1bpp'
-import { set4bpp } from './fun/set4bpp'
-import { DATA } from './model/DATA'
+import { buildMap } from "./fun/buildMap"
+import { findRooms } from "./fun/findRooms"
+import { set1bpp } from "./fun/set1bpp"
+import { set4bpp } from "./fun/set4bpp"
+import { DATA } from "./model/DATA"
 ;(globalThis as any).BOOT = function BOOT() {
 	set1bpp()
 	DATA.rooms = findRooms()
 	set4bpp()
-	DATA.map = buildMap()
+	const m = buildMap(12)
+	DATA.map = m.map
+	DATA.player.x = m.startPoint.x
+	DATA.player.y = m.startPoint.y
 }

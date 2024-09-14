@@ -1,4 +1,4 @@
-import { ITile } from './ITile'
+import { ITile } from "./ITile"
 
 export interface ISliceTile {
 	x: number

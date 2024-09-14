@@ -1,5 +1,5 @@
-import { IRoom } from './IRoom'
-import { ITile } from './ITile'
+import { IRoom } from "./IRoom"
+import { ITile } from "./ITile"
 
 export const DATA = {
 	ps: [] as string[],
@@ -8,6 +8,6 @@ export const DATA = {
 	btnps: [] as Record<string, boolean | undefined>[],
 	btns: [] as Record<string, boolean | undefined>[],
 	rooms: [] as IRoom[],
-	map: [] as ITile[][],
+	map: [] as (ITile | undefined)[][],
 	player: { x: 14, y: 5 },
 }
