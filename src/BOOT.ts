@@ -6,9 +6,9 @@ import { DATA } from "./model/DATA"
 ;(globalThis as any).BOOT = function BOOT() {
 	set1bpp()
 	DATA.rooms = findRooms()
-	set4bpp()
-	const m = buildMap(12)
+	const m = buildMap(5)
 	DATA.map = m.map
 	DATA.player.x = m.startPoint.x
 	DATA.player.y = m.startPoint.y
+	set4bpp()
 }

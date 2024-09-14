@@ -1,7 +1,13 @@
-import { ISO_TILE_H } from '../model/ISO_TILE_H'
-import { ISO_TILE_W } from '../model/ISO_TILE_W'
+import { ISO_TILE_H } from "../model/ISO_TILE_H"
+import { ISO_TILE_W } from "../model/ISO_TILE_W"
 
-export function drawTileL(x: number, y: number, u: number, v: number) {
+export function drawTileL(
+	x: number,
+	y: number,
+	u: number,
+	v: number,
+	size: number,
+) {
 	ttri(
 		x - ISO_TILE_W / 2,
 		y,
@@ -11,10 +17,10 @@ export function drawTileL(x: number, y: number, u: number, v: number) {
 		y + ISO_TILE_H / 2,
 		u,
 		v,
-		u + 16,
+		u + size,
 		v,
 		u,
-		v + 16,
+		v + size,
 		0,
 		-1,
 	)

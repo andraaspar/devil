@@ -39,19 +39,31 @@ export function buildMap(maxRoomCount: number) {
 			if (!tile) continue
 			if (tile.doorAbove) {
 				const tileAbove = map[v - 1]?.[u]
-				if (!tileAbove || tileAbove.wallBelow) tile.doorAbove = false
+				if (!tileAbove || tileAbove.wallBelow) {
+					tile.doorAbove = false
+					tile.wallAbove = true
+				}
 			}
 			if (tile.doorBelow) {
 				const tileBelow = map[v + 1]?.[u]
-				if (!tileBelow || tileBelow.wallAbove) tile.doorBelow = false
+				if (!tileBelow || tileBelow.wallAbove) {
+					tile.doorBelow = false
+					tile.wallBelow = true
+				}
 			}
 			if (tile.doorLeft) {
 				const tileLeft = map[v]?.[u - 1]
-				if (!tileLeft || tileLeft.wallRight) tile.doorLeft = false
+				if (!tileLeft || tileLeft.wallRight) {
+					tile.doorLeft = false
+					tile.wallLeft = true
+				}
 			}
 			if (tile.doorRight) {
 				const tileRight = map[v]?.[u - 1]
-				if (!tileRight || tileRight.wallLeft) tile.doorRight = false
+				if (!tileRight || tileRight.wallLeft) {
+					tile.doorRight = false
+					tile.wallRight = true
+				}
 			}
 			if (tile.isStart) {
 				startPoint.x = u
